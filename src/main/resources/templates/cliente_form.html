@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> 
+    </head>
+    <body>
+        
+         <header class="p-3 text-bg-dark">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+          </a>
+
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          </ul>
+
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+          </form>
+
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">Login</button>
+            <button type="button" class="btn btn-warning">Sign-up</button>
+          </div>
+        </div>
+      </div>
+    </header> 
+        <br>
+        <div class="container">
+           
+        <form class="row g-3"  action="/cliente/registro" method="POST" enctype="multipart/form-data">
+<!--          <div class="form-group">
+            <label for="validationCustom01" class="form-label">Id</label>
+            <input type="text" class="form-group" name="id"  >
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>-->
+            <div class="form-group">
+            <label for="validationCustom01" class="form-label">Nombre</label>
+            <input type="text" class="form-group" name="nombre"  >
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+            <div class="form-group">
+            <label for="riesgo" class="form-label">Riesgo</label>
+            <select  class="form-group" name="riesgo"  id="riesgo" >
+                <option selected>Selecione el riesgo</option>
+                <option th:each="riesgos : ${enumRiesgos}" 
+                        th:value="${riesgos}"
+                        th:text="${riesgos}"></option>
+            </select>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+            <div class="form-group">
+            <label for="validationCustom01" class="form-label">Patente</label>
+            <input type="text" class="form-group" name="patente"  >
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+            <div class="form-group">
+            <label for="validationCustom01" class="form-label">Poliza</label>
+            <input type="text" class="form-group" name="poliza"  >
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+            <div class="form-group my-3" >
+            <label for="validationCustom01" class="form-label">Compañia</label>
+            <select  name="idCompania" >
+                <option>Seleccionar compañia</option>
+                <option th:each ="companias : ${compania}"
+                        th:value =" ${companias.id}"
+                        th:text="${companias.razonSocial}"></option>
+            </select>
+<!--            <div class="valid-feedback">
+              Looks good!
+            </div>-->
+          </div>
+<!--            <div class="form-group">
+            <label for="validationCustom01" class="form-label">Fecha de alta</label>
+            <input type="text" class="form-group" name="alta"  >
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>-->
+                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>    
+                    </div>   
+                </div>
+                <div th:if="${exito != null}" class="card text-white bg-success mb-3 mensajeExito">
+                    <div class="card-body">
+                        <h5 class="card-title">Exito</h5>
+                        <p class="card-text" th:text="${exito}"></p>    
+                    </div>   
+                </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Crear cliente</button>
+          </div>
+        </form>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    </body>
+</html>
